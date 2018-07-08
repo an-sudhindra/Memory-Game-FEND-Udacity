@@ -3,7 +3,7 @@
  */
  // Establish the array which acts as a data source for the list
  const icons = ["fa fa-diamond", "fa fa-anchor", "fa fa-paper-plane-o", "fa fa-bicycle", "fa fa-leaf", "fa fa-cube", "fa fa-bolt", "fa fa-bomb", "fa fa-diamond", "fa fa-anchor", "fa fa-paper-plane-o", "fa fa-bicycle", "fa fa-leaf", "fa fa-cube", "fa fa-bolt", "fa fa-bomb"];
-
+var popup = document.querySelector('.popup');
 /*
  * Display the cards on the page/Create the cards
  *   - shuffl e the list of cards using the provided "shuffle" method below
@@ -32,7 +32,7 @@
 		
 	//Add click event to each card.
 	click(card);
-	popup.style.visibility = 'hidden'; 
+	// popup.style.visibility = 'hidden'; 
 	}
 }
 
@@ -66,7 +66,7 @@ let timer = document.querySelector('.timer');
  function click(card) {
 	// Card Click Event. Should be in the same loop so it's applied to all cards.
 	card.addEventListener("click", function () {
-		startTimer();
+		// startTimer();
 		// to make code shorter, add variables
 		const currentCard = this;
 		const previousCard = OpenCards[0];
@@ -101,7 +101,9 @@ function compare(currentCard, previousCard) {
 		OpenCards = [];
 		
 		// Is the game over? Check!
-		isOver();
+		if(isOver()){
+			return true;
+		};
 								
 		} else {
 		//delay action so first card stays open until second.
@@ -124,7 +126,7 @@ function compare(currentCard, previousCard) {
 	 
 function isOver() {
 	if(matchedCards.length === icons.length) {
-		congratsPopup();
+		congratsPopupSoon();
 		stopTimer();
 		}
 }	 
@@ -180,10 +182,13 @@ function rating() {
 	
 ///congrats Popup function
  
-  function congratsPopup() {
+function congratsPopupSoon() {
 
+	// alert("Entering function");
     // Display the modal
-    popup.style.top = "0";
+	popup.style.top = "0";
+	popup.style.display = 'block'; 
+	console.log("Popup shown"+ popup);
 
     // Add moves to the Modal
     const totalMoves = document.querySelector("#total_moves");
@@ -203,7 +208,7 @@ function rating() {
     totalMinutes.innerHTML = minutes;
     totalSeconds.innerHTML = seconds;
 
-	}
+}
 
 
 	
@@ -239,7 +244,7 @@ const restartbutton = document.querySelector(".restart");
 	 
 	 
 /// Start the game for the first time.
-init();	 
+// init();	 
 	 	 
 	 
 
