@@ -15,18 +15,9 @@
  let OpenCards = [];
 //need to create a new array, because OpenCards is always reset.
  let matchedCards = [];  
-
+ rateContainer = document.querySelector("#total_rate");
  
- /// Popups
- 
- //Defining total time for popup//
- let totalTime = document.getElementById("totalTime");
 
- //Defining modal by id//
- // Get the modal
- let popup = document.getElementById("popup");
-
- 
  
 // Create the cards. Initialize the game
   function init () {
@@ -45,19 +36,18 @@
 	}
 }
 
-////Timer items
-
+///Timer items
+let hours = 0;
 let minutes = 0;
 let seconds = 0;
 let interval = 0;
 let timer = document.querySelector('.timer');
-timer.innerHTML = minutes + " mins : " + seconds + " secs";	
 	
 ///Timer function
 
  function startTimer() {
   interval = setInterval(function() {
-    timer.innerHTML = minutes + " mins : " + seconds + " secs";
+	timer.innerHTML = minutes + " mins : " + seconds + " secs";
     seconds++;
     if (seconds === 60) {
       minutes++;
@@ -69,7 +59,6 @@ timer.innerHTML = minutes + " mins : " + seconds + " secs";
 	/// Stop timer function
  function stopTimer() {
   clearInterval(interval);
-  popup.style.visibility = 'hidden';
  }
 
 //Click event
@@ -135,7 +124,6 @@ function compare(currentCard, previousCard) {
 	 
 function isOver() {
 	if(matchedCards.length === icons.length) {
-		alert("GAME OVER!");
 		congratsPopup();
 		stopTimer();
 		}
@@ -194,19 +182,30 @@ function rating() {
  
   function congratsPopup() {
 
-  //display moves taken on the popup//
-  document.getElementById("totalMoves").innerHTML = moves;
-  //display the time taken on the popup//
-  finishTime = timer.innerHTML;
-  document.getElementById("totalTime").innerHTML = finishTime;
-  //display the star rating on the popup//
-  document.getElementById("starRating").innerHTML = stars;
-  console.log("Modal should show"); //testing comment for console//
+    // Display the modal
+    popup.style.top = "0";
 
- }
- 
-	
-	
+    // Add moves to the Modal
+    const totalMoves = document.querySelector("#total_moves");
+    totalMoves.innerHTML = moves;
+
+    // Add Rate
+    starsContainer.innerHTML = total_rate;
+
+    // Stop Timer
+    stopTimer();
+
+    // Add time to the Modal
+    const totalHours       = document.querySelector("#totalHours");
+    const totalMinutes     = document.querySelector("#totalMinutes");
+    const totalSeconds     = document.querySelector("#totalSeconds");
+    totalHours.innerHTML   = hours;
+    totalMinutes.innerHTML = minutes;
+    totalSeconds.innerHTML = seconds;
+
+	}
+
+
 	
 /// Restart button
 
@@ -254,5 +253,3 @@ init();
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-
- 
